@@ -1,4 +1,7 @@
 const router = require('express').Router();
+const validator = require('validator');
+const { celebrate, Joi } = require('celebrate');
+
 const {
   getCards, createCard, deleteCardById, likeCard, dislikeCard,
 } = require('../controllers/cards');
@@ -8,7 +11,7 @@ const validateURL = (value, helpers) => {
     return value;
   }
   return helpers.error('string.uri');
-}
+};
 
 router.get('/', getCards);
 

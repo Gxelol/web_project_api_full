@@ -1,14 +1,18 @@
-const router = require("express").Router();
-const { getUsers, getUserById } = require("../controllers/users");
+const router = require('express').Router();
+const { celebrate, Joi } = require('celebrate');
+const validator = require('validator');
+const {
+  getUsers, getUserById, updateUser, updateUserAvatar,
+} = require('../controllers/users');
 
 const validateURL = (value, helpers) => {
   if (validator.isURL(value)) {
     return value;
   }
   return helpers.error('string.uri');
-}
+};
 
-router.get("/", getUsers);
+router.get('/', getUsers);
 
 router.get('/:id', celebrate({
   params: Joi.object().keys({
