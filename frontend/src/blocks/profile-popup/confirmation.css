@@ -1,0 +1,22 @@
+.confirmation {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 0.3s, opacity 0.5s linear;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 430px;
+  height: 181px;
+  z-index: 3;
+  background-color: #ffffff;
+  border-radius: 10px;
+  position: fixed;
+  top: 30%;
+}
+
+@media screen and (max-width: 680px) {
+  .confirmation {
+    width: 70%;
+    height: 322px;
+  }
+}

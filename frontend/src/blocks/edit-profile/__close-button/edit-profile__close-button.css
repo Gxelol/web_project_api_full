@@ -1,0 +1,22 @@
+.edit-profile__close-button {
+  font-size: 30px;
+  font-weight: normal;
+  color: #ffffff;
+  position: absolute;
+  top: -35px;
+  right: -30px;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.edit-profile__close-button:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 680px) {
+  .edit-profile__close-button {
+    font-size: 26px;
+    right: 0;
+  }
+}

@@ -1,0 +1,17 @@
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 0.3s, opacity 0.5s linear;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 35%;
+  height: 55%;
+  z-index: 3;
+  background-color: #ffffff;
+  border-radius: 10px;
+  position: fixed;
+  top: 25%;
+  justify-content: center;
+  text-align: center;
+}

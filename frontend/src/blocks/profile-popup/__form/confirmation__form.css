@@ -1,0 +1,7 @@
+.confirmation__form {
+  display: flex;
+  width: 85%;
+  align-self: center;
+  flex-direction: column;
+  align-items: center;
+}

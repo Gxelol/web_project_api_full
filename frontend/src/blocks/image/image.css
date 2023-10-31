@@ -1,0 +1,11 @@
+.image {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 0.3s, opacity 0.5s linear;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  z-index: 3;
+  position: fixed;
+  top: 15%;
+}

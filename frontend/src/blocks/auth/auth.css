@@ -1,0 +1,19 @@
+.auth {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 35%;
+  height: 65%;
+  z-index: 3;
+  text-align: center;
+  background-color: #000000;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 680px) {
+  .auth {
+    width: 70%;
+    height: 322px;
+    left: 15%;
+  }
+}
