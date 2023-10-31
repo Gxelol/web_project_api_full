@@ -1,5 +1,5 @@
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 
 module.exports.getUsers = (req, res, next) => {
@@ -63,12 +63,8 @@ module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   const { NODE_ENV, JWT_SECRET } = process.env;
 
-  User.findUserByCredentials(email, password).select('+password')
+  User.findUserByCredentials(email, password)
     .then((user) => {
-      if (!user) {
-        return Promise.reject(new Error('Senha ou e-mail incorreto'));
-      }
-
       const token = jwt.sign(
         {
           _id: user._id,
@@ -76,14 +72,6 @@ module.exports.login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
-
-      return bcrypt.compare(password, user.password);
-    })
-    .then((matched) => {
-      if (!matched) {
-        return Promise.reject(new Error('Senha ou e-mail incorreto'));
-      }
-
       res.send({ token });
     })
     .catch((err) => next(err));
