@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const urlPattern = /(https:\/\/|http:\/\/)(w{3}\.)?[/\S]+\/?[^\S]*[#]?$/;
 const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
@@ -50,5 +51,21 @@ const userSchema = new mongoose.Schema({
     select: false,
   },
 });
+
+userSchema.statics.findUserByCredentials = (email, password) => this.findOne({ email })
+  .then((user) => {
+    if (!user) {
+      return Promise.reject(new Error('Senha ou e-mail incorreto'));
+    }
+
+    return bcrypt.compare(password, user.password)
+      .then((matched) => {
+        if (!matched) {
+          return Promise.reject(new Error('Senha ou e-mail incorreto'));
+        }
+
+        return user;
+      });
+  });
 
 module.exports = mongoose.model('user', userSchema);
