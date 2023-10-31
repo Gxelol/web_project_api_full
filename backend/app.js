@@ -1,46 +1,45 @@
-const express = require("express");
-const cors = require("cors");
+const express = require('express');
+const cors = require('cors');
+const { celebrate, Joi, errors } = require('celebrate');
 
-const mongoose = require("mongoose");
+const bodyParser = require('body-parser');
+const userRouter = require('./routes/users');
+const cardRouter = require('./routes/cards');
 
-const userRouter = require("./backend/routes/users");
-const cardRouter = require("./backend/routes/cards");
-const bodyParser = require("body-parser");
+const auth = require('./middleware/auth');
 
-const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { errors } = require("celebrate");
+const { requestLogger, errorLogger } = require('./middleware/logger');
 const {
   login,
   createUser,
-  getUserById,
-} = require("./backend/controllers/users");
+} = require('./controllers/users');
 
 const { PORT = 3000 } = process.env;
 const app = express();
 
-require("dotenv").config();
+require('dotenv').config();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors());
-app.options("*", cors());
+app.options('*', cors());
 
 app.use(requestLogger);
 
 app.post(
-  "/signin",
+  '/signin',
   celebrate({
     body: Joi.object().keys({
       email: Joi.string().required().email(),
       password: Joi.string().required().min(8),
     }),
   }),
-  login
+  login,
 );
 
 app.post(
-  "/signup",
+  '/signup',
   celebrate({
     body: Joi.object().keys({
       name: Joi.string().min(2).max(30),
@@ -50,13 +49,14 @@ app.post(
       password: Joi.string().required().min(5),
     }),
   }),
-  createUser
+  createUser,
 );
 
-app.use("/users", auth, userRouter);
+app.use('/users', auth, userRouter);
+app.use('/cards', auth, cardRouter);
 
-app.use("*", (req, res) => {
-  res.status(404).send({ message: "A solicitação não foi encontrada" });
+app.use('*', (req, res) => {
+  res.status(404).send({ message: 'A solicitação não foi encontrada' });
 });
 
 app.use(errorLogger);
@@ -67,7 +67,7 @@ app.use((err, req, res, next) => {
     app.use((err, req, res, next) => {
       const { statusCode = 500, message } = err;
       res.status(statusCode).send({
-        message: statusCode === 500 ? "Ocorreu um erro no servidor" : message,
+        message: statusCode === 500 ? 'Ocorreu um erro no servidor' : message,
       });
     });
   }
