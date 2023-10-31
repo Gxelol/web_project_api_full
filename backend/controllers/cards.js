@@ -16,7 +16,7 @@ module.exports.createCard = (req, res, next) => {
 };
 
 module.exports.deleteCardById = (req, res, next) => {
-  const userId = req.params.id;
+  const cardId = req.params.id;
 
   Card.findById(cardId)
     .orFail(() => {

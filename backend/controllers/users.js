@@ -1,6 +1,6 @@
-const User = require("../models/user");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const User = require('../models/user');
 
 module.exports.getUsers = (req, res, next) => {
   User.find({})
@@ -17,22 +17,22 @@ module.exports.getUserById = (req, res, next) => {
 };
 
 module.exports.createUser = (req, res, next) => {
-  const { name, about, avatar, email } = req.body;
+  const {
+    name, about, avatar, email,
+  } = req.body;
 
   bcrypt
     .hash(req.body.password, 10)
-    .then((hash) =>
-      User.create({
-        name,
-        about,
-        avatar,
-        email,
-        password: hash,
-      })
-    )
+    .then((hash) => User.create({
+      name,
+      about,
+      avatar,
+      email,
+      password: hash,
+    }))
     .then((user) => {
       if (!user) {
-        throw new Error("Ocorreu um erro ao criar usuário");
+        throw new Error('Ocorreu um erro ao criar usuário');
       }
       res.send({
         email,
@@ -63,25 +63,25 @@ module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   const { NODE_ENV, JWT_SECRET } = process.env;
 
-  User.findUserByCredentials( email, password ).select('+password')
+  User.findUserByCredentials(email, password).select('+password')
     .then((user) => {
       if (!user) {
-        return Promise.reject(new Error("Senha ou e-mail incorreto"));
+        return Promise.reject(new Error('Senha ou e-mail incorreto'));
       }
 
       const token = jwt.sign(
         {
           _id: user._id,
         },
-        NODE_ENV === "production" ? JWT_SECRET : "dev-secret",
-        { expiresIn: "7d" }
+        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+        { expiresIn: '7d' },
       );
 
       return bcrypt.compare(password, user.password);
     })
     .then((matched) => {
       if (!matched) {
-        return Promise.reject(new Error("Senha ou e-mail incorreto"));
+        return Promise.reject(new Error('Senha ou e-mail incorreto'));
       }
 
       res.send({ token });
