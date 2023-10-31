@@ -47,7 +47,7 @@ const userSchema = new mongoose.Schema({
       },
       message: 'Senha Fraca!',
     },
-    select: false
+    select: false,
   },
 });
 
