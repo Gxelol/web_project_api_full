@@ -1,0 +1,17 @@
+.profile__edit-pic-button {
+  position: absolute;
+  background: none;
+  z-index: 1;
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
+}
+
+.profile__edit-pic-button:hover {
+  background-image: url('../../../images/Vectoredit.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 30px;
+  background-color: #000000b7;
+  cursor: pointer;
+}

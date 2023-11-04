@@ -1,0 +1,5 @@
+.container__semitransparent_active {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear 0.3s, opacity 0.5s linear;
+}

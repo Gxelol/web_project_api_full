@@ -1,0 +1,22 @@
+.image__close-button {
+  font-size: 30px;
+  font-weight: normal;
+  color: #ffffff;
+  position: absolute;
+  top: -35px;
+  right: -30px;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.image__close-button:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 680px) {
+  .image__close-button {
+    font-size: 26px;
+    right: 0;
+  }
+}

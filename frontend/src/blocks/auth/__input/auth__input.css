@@ -1,0 +1,10 @@
+.auth__input {
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+  margin-top: 30px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-bottom: 1px solid #ffffff;
+  padding: 5px;
+}

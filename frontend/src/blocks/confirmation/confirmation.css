@@ -1,0 +1,10 @@
+.confirmation {
+  height: 181px;
+}
+
+@media screen and (max-width: 680px) {
+  .confirmation {
+    width: 70%;
+    height: 181px;
+  }
+}

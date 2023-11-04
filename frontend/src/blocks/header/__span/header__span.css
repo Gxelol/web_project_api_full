@@ -1,0 +1,11 @@
+.header__span {
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1.5;
+}
+
+@media screen and (max-width: 768px) {
+  .header__span {
+    font-size: 12px;
+  }
+}

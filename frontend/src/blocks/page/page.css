@@ -1,0 +1,9 @@
+.page {
+  background-color: #000000;
+  width: 100%;
+  min-width: 320px;
+  overflow: hidden;
+  margin: 0 auto;
+  color: white;
+  font-family: 'Inter', Arial, sans-serif;
+}
