@@ -16,6 +16,14 @@ module.exports.getUserById = (req, res, next) => {
     .catch((err) => next(err));
 };
 
+module.exports.getUserInfo = (req, res, next) => {
+  const userId = req.params.id;
+
+  User.findById(userId)
+    .then((user) => res.send(user))
+    .catch((err) => next(err));
+};
+
 module.exports.createUser = (req, res, next) => {
   const {
     name, about, avatar, email,
